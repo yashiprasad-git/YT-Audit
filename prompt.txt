@@ -52,9 +52,14 @@ Rules for what counts as a real issue:
   Do NOT flag a field as blank if it contains any value, even a number
   without a label. Do NOT flag Average CPM or any CPM field if a
   number is present — even EUR 6 is a valid CPM value.
-- Currency missing = no symbol (€, $, £) and no code (EUR, USD, GBP,
-  AUD) appears ANYWHERE near the spend or CPM figures.
-  If EUR, $ or any currency symbol appears — do NOT flag.
+- Currency missing = ONLY flag if you cannot find any currency symbol
+  (€, $, £) or currency code (EUR, USD, GBP, AUD, INR, etc.) ANYWHERE
+  on the entire slide — not just next to one specific figure.
+  If EUR appears even once anywhere on the slide, currency is present
+  for ALL figures on that slide. Do NOT flag individual fields as
+  missing currency if the currency appears elsewhere on the same slide.
+  When in doubt — do NOT flag. Only flag if currency is completely
+  and entirely absent from the whole slide.
 - Brand Category inconsistent = only flag if the category clearly
   contradicts the brand type (e.g. B2B category for a B2C brand).
 - Language/Geo mismatch = only flag if Geo and Language are clearly
