@@ -4,7 +4,7 @@ import base64
 
 # ── Page config ──────────────────────────────────────────
 st.set_page_config(
-    page_title="Silverpush Campaign Analyser",
+    page_title="YT-Audit",
     page_icon="📊",
     layout="wide"
 )
@@ -18,7 +18,7 @@ def check_password():
             st.session_state["password_correct"] = False
 
     if "password_correct" not in st.session_state:
-        st.markdown("### 🔐 Silverpush Campaign Analyser")
+        st.markdown("### 🔐 YT-Audit")
         st.text_input(
             "Enter password",
             type="password",
@@ -27,7 +27,7 @@ def check_password():
         )
         return False
     elif not st.session_state["password_correct"]:
-        st.markdown("### 🔐 Silverpush Campaign Analyser")
+        st.markdown("### 🔐 YT-Audit")
         st.text_input(
             "Enter password",
             type="password",
@@ -43,7 +43,7 @@ def check_password():
 # ── Main app ──────────────────────────────────────────────
 if check_password():
 
-    st.title("📊 Silverpush — Ad Alignment & Suitability Analyser")
+    st.title("📊 YT-Audit — Ad Alignment & Suitability Analyser")
     st.markdown(
         "Upload the campaign PDF report and click **Analyse Report** "
         "to get the full structured analysis."
@@ -81,8 +81,9 @@ if check_password():
                         pdf_bytes
                     ).decode("utf-8")
 
-                    # Load system prompt and API key from secrets
-                    system_prompt = st.secrets["SYSTEM_PROMPT"]
+                    # Load system prompt from file
+                    with open("prompt.txt", "r", encoding="utf-8") as f:
+                        system_prompt = f.read()
 
                     # Initialise OpenAI client
                     client = OpenAI(
