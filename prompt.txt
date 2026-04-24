@@ -29,7 +29,9 @@ FORMATTING RULE — CRITICAL:
 Every individual finding must appear on its own separate line.
 Add a blank line between each finding, check, or bullet point.
 Never run multiple findings together on the same line.
-Passing checks with no issues are completely silent — output nothing.
+Individual passing checks are silent — do not output a line for each one.
+However, if an entire section has NO issues at all, write the section
+summary line (e.g. "✅ No issues found on Slide 2.").
 
 ---
 
@@ -65,9 +67,7 @@ Rules for what counts as a real issue:
 - Language/Geo mismatch = only flag if Geo and Language are clearly
   incompatible with no plausible explanation.
 - Do NOT flag the Key Exclusions field under any circumstances.
-- Analyzed Channels: only flag if the value is clearly a suspicious
-  number (e.g. single digits like 1, 2, 3) relative to millions of
-  impressions. Do NOT flag if the field is not visible — say nothing.
+- Do NOT flag the Analyzed Channels field under any circumstances.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 SLIDE 3 — EXECUTIVE SUMMARY
@@ -84,14 +84,22 @@ Check: is Total Wasted Impressions % greater than or equal to each
 individual component (Brand Unsafe %, Misaligned %, Language %)?
 If yes (total is the largest): "✅ Cross-check 1 passed — wastage percentages are internally consistent."
 If no (any component exceeds the total): "❌ Cross-check 1 failed — [component]% exceeds Total Wasted %."
-Example that PASSES: Total = 97.48%, Misaligned = 73.57% → 97.48 > 73.57 → ✅
-Example that FAILS: Total = 55%, Misaligned = 73.57% → 55 < 73.57 → ❌
+Example that PASSES: Total = 80%, Misaligned = 60% → 80 > 60 → ✅
+Example that FAILS: Total = 55%, Misaligned = 70% → 55 < 70 → ❌
 
 CROSS-CHECK 2 — Brand Unsafe Impressions % must match Slide 7:
-Compare the Brand Unsafe Impressions % on Slide 3 with the
-Unsafe Impressions % on Slide 7.
-If identical: "✅ Cross-check 2 passed — Brand Unsafe Impressions % matches: [X]% on Slide 3 = [X]% on Slide 7."
-If different: "❌ Cross-check 2 failed — Slide 3 shows [X]%, Slide 7 shows [Y]%. Mismatch."
+Step 1: Read the Brand Unsafe Impressions % from Slide 3. Note this value as X%.
+Step 2: Go to Slide 7. Search specifically for the number X% anywhere on the
+slide that is NOT inside or part of the pie/donut chart.
+Important: Slide 7 contains a pie chart showing how unsafe impressions break
+down by category (e.g. Explicit Content, News, Violence etc.). The slices of
+this pie chart add up to approximately 100% — every number inside or adjacent
+to the pie chart is a category share, not the overall unsafe total. Ignore all
+of them entirely.
+Step 3: If you find X% outside the pie chart on Slide 7:
+"✅ Cross-check 2 passed — Brand Unsafe Impressions % matches: [X]% on Slide 3 confirmed on Slide 7."
+If you cannot find X% outside the pie chart:
+"❌ Cross-check 2 — Slide 3 shows [X]%. Could not confirm this value on Slide 7 outside the pie chart. Verify manually."
 
 CROSS-CHECK 3 — Misaligned % must match Slide 8:
 Compare the Misaligned IMPRESSIONS % on Slide 3 with Slide 8.
@@ -100,13 +108,11 @@ If different: "❌ Cross-check 3 failed — Slide 3 shows [X]%, Slide 8 shows [Y
 
 CROSS-CHECK 4 — CPM vs qCPM direction:
 qCPM must be numerically HIGHER than Campaign CPM.
-EUR 222 is higher than EUR 6 → that is a PASS.
 If qCPM > Campaign CPM: "✅ Cross-check 4 passed — qCPM ([amount]) is correctly higher than Campaign CPM ([amount])."
 If qCPM ≤ Campaign CPM: "❌ Cross-check 4 failed — qCPM ([amount]) is not higher than Campaign CPM ([amount])."
 
 CROSS-CHECK 5 — Wasted Ad Spend plausibility:
 Wasted Ad Spend must be less than or equal to Total Media Spend.
-EUR 48,640 is less than EUR 49,801 → that is a PASS.
 If Wasted ≤ Total: "✅ Cross-check 5 passed — Wasted Ad Spend ([amount]) does not exceed Total Media Spend ([amount])."
 If Wasted > Total: "❌ Cross-check 5 failed — Wasted Ad Spend ([amount]) exceeds Total Media Spend ([amount])."
 
@@ -120,8 +126,6 @@ SLIDE 4 — TOP OBSERVATIONS
 PART A — DATA FLAGS:
 Before writing the observations, scan the existing slide copy and
 prefix every finding with ✅ or ❌:
-
-Output each check on its own separate line.
 
 Output each check on its own line with a blank line between them.
 Only show a line if there is something to flag. Passing checks are silent.
@@ -251,10 +255,12 @@ SLIDE 11 — SUBSCRIBER BASE ANALYSIS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 PART A — DATA FLAGS:
-Prefix every finding with ✅ or ❌:
-- ✅ or ❌ VTR data present or absent in chart vs what slide references
-- ✅ or ❌ Any subscriber tier showing 0 impressions but VTR still plotted
-  (flag ❌ as data anomaly if found)
+- If VTR data is present in chart and slide references it correctly:
+  "✅ VTR data confirmed in chart."
+- If VTR is absent from chart but slide references it:
+  "❌ VTR referenced in slide but not present in chart — remove VTR references."
+- If a subscriber tier shows 0 impressions but VTR is still plotted for it:
+  "❌ Data anomaly — [tier name] shows 0 impressions but VTR is plotted."
 
 PART B — INSIGHT:
 Check if the existing slide caption matches what should be written.
