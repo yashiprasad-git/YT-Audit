@@ -36,12 +36,8 @@ Only flag issues if any of the following are present:
   (e.g. a clearly B2C product listed under a B2B category)
 - Language Targeting and Geo seem mismatched
   (e.g. Geo = Germany but Language = English with no explanation)
-- Key Exclusions field is blank ONLY for brand types where exclusions
-  are standard practice: financial services, alcohol, gambling, adult
-  content, or brands explicitly targeting adults only.
-  Do NOT flag blank Key Exclusions for cosmetics, beauty, FMCG,
-  retail, or general consumer brands — exclusions are not expected
-  for these categories.
+- Do NOT flag the Key Exclusions field under any circumstances.
+  It is optional and may intentionally be left blank.
 - Analyzed Channels count seems disproportionately low or high
   relative to total impressions
 
