@@ -88,18 +88,20 @@ Example that PASSES: Total = 80%, Misaligned = 60% → 80 > 60 → ✅
 Example that FAILS: Total = 55%, Misaligned = 70% → 55 < 70 → ❌
 
 CROSS-CHECK 2 — Brand Unsafe Impressions % must match Slide 7:
-Step 1: Read the Brand Unsafe Impressions % from Slide 3. Note this value as X%.
-Step 2: Go to Slide 7. Search specifically for the number X% anywhere on the
-slide that is NOT inside or part of the pie/donut chart.
-Important: Slide 7 contains a pie chart showing how unsafe impressions break
-down by category (e.g. Explicit Content, News, Violence etc.). The slices of
-this pie chart add up to approximately 100% — every number inside or adjacent
-to the pie chart is a category share, not the overall unsafe total. Ignore all
-of them entirely.
-Step 3: If you find X% outside the pie chart on Slide 7:
-"✅ Cross-check 2 passed — Brand Unsafe Impressions % matches: [X]% on Slide 3 confirmed on Slide 7."
-If you cannot find X% outside the pie chart:
-"❌ Cross-check 2 — Slide 3 shows [X]%. Could not confirm this value on Slide 7 outside the pie chart. Verify manually."
+Slide 7 has two distinct areas:
+LEFT PANEL — contains two clearly labelled standalone metrics:
+  - "Unsafe Impressions" followed by a large % = the overall unsafe impressions figure
+  - "Unsafe Channels" followed by a large % = a different metric, do not use this one
+DONUT CHART (centre/right) — shows the breakdown of unsafe impressions by
+category (Explicit Sexual Content, News & Politics, etc.). The slice labels
+(e.g. 22.9%, 22.6%, 16.3%) represent distribution within unsafe categories,
+NOT the overall unsafe %. Ignore every number on or around the donut chart.
+
+To complete this check:
+Read the "Unsafe Impressions" % from the LEFT PANEL of Slide 7.
+Compare it with the Brand Unsafe Impressions % on Slide 3.
+If they match: "✅ Cross-check 2 passed — Brand Unsafe Impressions % matches: [X]% on Slide 3 = [X]% on Slide 7."
+If they differ: "❌ Cross-check 2 failed — Slide 3 shows [X]%, Slide 7 Unsafe Impressions shows [Y]%. Mismatch."
 
 CROSS-CHECK 3 — Misaligned % must match Slide 8:
 Compare the Misaligned IMPRESSIONS % on Slide 3 with Slide 8.
