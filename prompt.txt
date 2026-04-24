@@ -87,10 +87,21 @@ If no (any component exceeds the total): "❌ Cross-check 1 failed — [componen
 Example that PASSES: Total = 97.48%, Misaligned = 73.57% → 97.48 > 73.57 → ✅
 Example that FAILS: Total = 55%, Misaligned = 73.57% → 55 < 73.57 → ❌
 
-CROSS-CHECK 2 — Brand Unsafe % must match Slide 7:
-Compare the IMPRESSIONS % on Slide 3 with the IMPRESSIONS % on Slide 7.
-If the two numbers are identical: "✅ Cross-check 2 passed — Brand Unsafe % matches: [X]% on Slide 3 = [X]% on Slide 7."
-If different: "❌ Cross-check 2 failed — Slide 3 shows [X]%, Slide 7 shows [Y]%. Mismatch."
+CROSS-CHECK 2 — Brand Unsafe Impressions % must match Slide 7:
+On Slide 7, look ONLY for the single overall "Unsafe Impressions %"
+headline figure — this is the total brand unsafe impressions percentage
+for the whole campaign, typically shown as a large prominent number or
+a key metric callout.
+Do NOT use any number from the pie chart or donut chart on Slide 7.
+The pie chart shows the breakdown of unsafe impressions by category
+(e.g. 22.9% Explicit Content, 15% News, etc.) — these are splits
+within the unsafe total, not the total itself. Never use these.
+Compare: Brand Unsafe Impressions % on Slide 3 vs the overall Unsafe
+Impressions % headline figure on Slide 7 (not the pie chart).
+If identical: "✅ Cross-check 2 passed — Brand Unsafe Impressions % matches:
+[X]% on Slide 3 = [X]% on Slide 7 (headline figure)."
+If different: "❌ Cross-check 2 failed — Brand Unsafe Impressions %:
+Slide 3 shows [X]%, Slide 7 headline shows [Y]%. Mismatch."
 
 CROSS-CHECK 3 — Misaligned % must match Slide 8:
 Compare the Misaligned IMPRESSIONS % on Slide 3 with Slide 8.
