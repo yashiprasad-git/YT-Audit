@@ -91,6 +91,7 @@ if check_password():
                     # Send PDF directly via Responses API
                     response = client.responses.create(
                         model="gpt-4o",
+                        temperature=0,
                         instructions=system_prompt,
                         input=[
                             {

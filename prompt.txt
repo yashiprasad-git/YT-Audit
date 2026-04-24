@@ -39,7 +39,13 @@ Only flag issues if any of the following are present:
 - Do NOT flag the Key Exclusions field under any circumstances.
   It is optional and may intentionally be left blank.
 - Analyzed Channels count seems disproportionately low or high
-  relative to total impressions
+  relative to total impressions.
+  IMPORTANT: The Analyzed Channels count is a large number (typically
+  in the hundreds or thousands). It is a distinct field explicitly
+  labelled "Analyzed Channels" or similar. Do NOT confuse it with
+  CPM, qCPM, or any currency figure — those are always preceded by
+  a currency symbol or code (€, EUR, $, etc.). If you cannot locate
+  a clearly labelled Analyzed Channels count, do not flag or guess.
 
 If no issues found: "No issues found on Slide 2."
 
@@ -102,12 +108,15 @@ PART A — DATA FLAGS:
 Before writing the observations, scan the existing slide copy for the
 following issues and flag them:
 
-- VTR data flag: If VTR is not shown anywhere in the report data
-  (not in Slide 6 chart, not mentioned anywhere), then flag any
-  mention of VTR, view-through rate, or VTR-related language
-  appearing in the slide copy. These references must be removed.
-  Format: "⚠️ VTR referenced in Slide 4 copy but VTR data is not
-  present in this report. Remove all VTR references."
+- VTR data flag: Only flag this if you can directly read and quote
+  the exact VTR text as it appears in the Slide 4 copy.
+  Do NOT flag VTR if you cannot find and quote a specific sentence
+  or phrase from Slide 4 that mentions VTR or view-through rate.
+  Do not assume VTR is referenced — you must see it written on the slide.
+  If flagging, quote the exact text:
+  Format: "⚠️ Slide 4 contains VTR reference: '[exact quoted text]'
+  — remove this as VTR data is not present in this report."
+  If no VTR language is found in Slide 4 copy: do not mention VTR at all.
 
 - Any stat cited in the Top Observations copy that does not match
   the numbers on Slide 3, 7, or 8 should be flagged as a mismatch.
