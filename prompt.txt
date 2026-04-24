@@ -25,6 +25,12 @@ SYMBOL KEY — use on every single line of output:
 Every finding, check, observation, validation, and recommendation
 must be prefixed with one of these three symbols. No exceptions.
 
+FORMATTING RULE — CRITICAL:
+Every individual finding must appear on its own separate line.
+Add a blank line between each finding, check, or bullet point.
+Never run multiple findings together on the same line.
+Passing checks with no issues are completely silent — output nothing.
+
 ---
 
 OUTPUT STRUCTURE
@@ -36,80 +42,70 @@ SLIDE 2 — CAMPAIGN OVERVIEW
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Do NOT summarize the campaign parameters.
-Only output a line if there is an actual issue. Do not output a line
-for checks that pass — passing checks are silent.
-Only use ❌ when a real problem is found. If nothing is wrong, write:
-"✅ No issues found on Slide 2."
+Do NOT judge whether KPI choices are appropriate or suitable.
+Only output a line when a genuine, clearly visible problem exists.
+Passing checks are completely silent — output nothing for them.
+If no issues found at all: write "✅ No issues found on Slide 2."
 
-Check the following silently and only report issues:
-
-- If any parameter field is blank or incomplete → ❌ [Field name] is blank or incomplete.
-- If currency is missing from spend or CPM figures → ❌ Currency missing from [field].
-  (Currency is present if a symbol such as €, $, £ or a code such as
-  EUR, USD, GBP, AUD appears anywhere near the figures. Only flag if
-  completely absent.)
-- If Brand Category seems inconsistent with the brand name → ❌ [explain inconsistency].
-- If Language Targeting and Geo are mismatched → ❌ [explain mismatch].
+Rules for what counts as a real issue:
+- A field is blank = the field exists but has NO value at all.
+  Do NOT flag a field as blank if it contains any value, even a number
+  without a label. Do NOT flag Average CPM or any CPM field if a
+  number is present — even EUR 6 is a valid CPM value.
+- Currency missing = no symbol (€, $, £) and no code (EUR, USD, GBP,
+  AUD) appears ANYWHERE near the spend or CPM figures.
+  If EUR, $ or any currency symbol appears — do NOT flag.
+- Brand Category inconsistent = only flag if the category clearly
+  contradicts the brand type (e.g. B2B category for a B2C brand).
+- Language/Geo mismatch = only flag if Geo and Language are clearly
+  incompatible with no plausible explanation.
 - Do NOT flag the Key Exclusions field under any circumstances.
-  It is optional and may intentionally be left blank.
-- Analyzed Channels count: The count is a large number (typically in
-  the hundreds or thousands), in a field explicitly labelled
-  "Analyzed Channels" or similar. Do NOT confuse it with CPM, qCPM,
-  or any currency figure — those are always preceded by a currency
-  symbol or code (€, EUR, $, etc.).
-  If the count seems disproportionately low or high → ❌ Analyzed
-  Channels count of [N] seems disproportionate relative to [impressions].
-  If you cannot locate the field at all → say nothing, skip this check.
+- Analyzed Channels: only flag if the value is clearly a suspicious
+  number (e.g. single digits like 1, 2, 3) relative to millions of
+  impressions. Do NOT flag if the field is not visible — say nothing.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 SLIDE 3 — EXECUTIVE SUMMARY
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Do NOT summarize or restate the numbers on this slide.
-Prefix every cross-check result with ✅ or ❌:
+Output each cross-check on its own separate line with a blank line between each.
+Read the numbers carefully before assigning ✅ or ❌.
+✅ = the check passes, numbers are correct.
+❌ = the check fails, there is a real problem.
 
 CROSS-CHECK 1 — Internal consistency of wastage percentages:
-The three individual wastage figures (Brand Unsafe %, Misaligned %,
-Non-Targeted Language %) are distinct/deduplicated values. They should
-NOT be expected to add up exactly to the Total Wasted Impressions %.
-However, flag ❌ if:
-- Any individual component EXCEEDS the total wasted impressions %
-  (mathematically impossible)
-- The total wasted impressions % is LOWER than the single largest
-  component (also impossible — e.g. if Misaligned = 65% but
-  Total Wasted = 55%, that is a discrepancy)
-  Worked example of what is FINE — prefix ✅:
-  Total Wasted = 97.48%, Misaligned = 73.57% → 97.48 > 73.57 → no issue.
-  Worked example of what SHOULD be flagged ❌:
-  Total Wasted = 55%, Misaligned = 73.57% → 55 < 73.57 → flag this.
-- Any figure appears to be 0% or blank when the corresponding
-  detailed slide shows data
+Check: is Total Wasted Impressions % greater than or equal to each
+individual component (Brand Unsafe %, Misaligned %, Language %)?
+If yes (total is the largest): "✅ Cross-check 1 passed — wastage percentages are internally consistent."
+If no (any component exceeds the total): "❌ Cross-check 1 failed — [component]% exceeds Total Wasted %."
+Example that PASSES: Total = 97.48%, Misaligned = 73.57% → 97.48 > 73.57 → ✅
+Example that FAILS: Total = 55%, Misaligned = 73.57% → 55 < 73.57 → ❌
 
 CROSS-CHECK 2 — Brand Unsafe % must match Slide 7:
-The Brand Unsafe % shown on Slide 3 must exactly match the
-"Unsafe Impressions" % shown on Slide 7.
-If match: "✅ Slide 3 shows [X]% unsafe. Slide 7 shows [X]% unsafe. Match confirmed."
-If mismatch: "❌ Slide 3 shows [X]% unsafe. Slide 7 shows [Y]% unsafe. Mismatch — fix required."
+Compare the IMPRESSIONS % on Slide 3 with the IMPRESSIONS % on Slide 7.
+If the two numbers are identical: "✅ Cross-check 2 passed — Brand Unsafe % matches: [X]% on Slide 3 = [X]% on Slide 7."
+If different: "❌ Cross-check 2 failed — Slide 3 shows [X]%, Slide 7 shows [Y]%. Mismatch."
 
 CROSS-CHECK 3 — Misaligned % must match Slide 8:
-The Misaligned % shown on Slide 3 must exactly match the
-"Impression Impact" % shown on Slide 8.
-If match: "✅ Slide 3 shows [X]% misaligned. Slide 8 shows [X]% misaligned. Match confirmed."
-If mismatch: "❌ Slide 3 shows [X]% misaligned. Slide 8 shows [Y]% misaligned. Mismatch — fix required."
+Compare the Misaligned IMPRESSIONS % on Slide 3 with Slide 8.
+If identical: "✅ Cross-check 3 passed — Misaligned % matches: [X]% on Slide 3 = [X]% on Slide 8."
+If different: "❌ Cross-check 3 failed — Slide 3 shows [X]%, Slide 8 shows [Y]%. Mismatch."
 
 CROSS-CHECK 4 — CPM vs qCPM direction:
-qCPM must always be HIGHER than Campaign CPM
-(since it reflects the true cost after removing wasted impressions).
-If correct: "✅ qCPM ([amount]) is higher than Campaign CPM ([amount]). Correct direction."
-If wrong: "❌ qCPM ([amount]) is NOT higher than Campaign CPM ([amount]). Fix required."
+qCPM must be numerically HIGHER than Campaign CPM.
+EUR 222 is higher than EUR 6 → that is a PASS.
+If qCPM > Campaign CPM: "✅ Cross-check 4 passed — qCPM ([amount]) is correctly higher than Campaign CPM ([amount])."
+If qCPM ≤ Campaign CPM: "❌ Cross-check 4 failed — qCPM ([amount]) is not higher than Campaign CPM ([amount])."
 
 CROSS-CHECK 5 — Wasted Ad Spend plausibility:
-Wasted Ad Spend should be less than or equal to Total Media Spend.
-If correct: "✅ Wasted Ad Spend ([amount]) does not exceed Total Media Spend ([amount]). Plausible."
-If wrong: "❌ Wasted Ad Spend ([amount]) exceeds Total Media Spend ([amount]). Fix required."
+Wasted Ad Spend must be less than or equal to Total Media Spend.
+EUR 48,640 is less than EUR 49,801 → that is a PASS.
+If Wasted ≤ Total: "✅ Cross-check 5 passed — Wasted Ad Spend ([amount]) does not exceed Total Media Spend ([amount])."
+If Wasted > Total: "❌ Cross-check 5 failed — Wasted Ad Spend ([amount]) exceeds Total Media Spend ([amount])."
 
-Only write "✅ All cross-checks passed. No issues on Slide 3." if ALL
-five cross-checks pass. Do not write this line if any ❌ was raised.
+If all five checks show ✅: add one final line: "✅ All cross-checks passed."
+If any check shows ❌: do not add a summary line.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 SLIDE 4 — TOP OBSERVATIONS
@@ -121,25 +117,26 @@ prefix every finding with ✅ or ❌:
 
 Output each check on its own separate line.
 
-- VTR check (output on its own line):
-  Only flag ❌ if you can directly read and quote the exact VTR text
-  as it appears in the Slide 4 copy. Do NOT flag if you cannot find
-  and quote a specific sentence or phrase mentioning VTR or
-  view-through rate. Do not assume — you must see it written.
-  If flagging: "❌ VTR reference found in Slide 4: '[exact quoted text]' — remove."
-  If not found: "✅ No VTR references in Slide 4 copy."
+Output each check on its own line with a blank line between them.
+Only show a line if there is something to flag. Passing checks are silent.
 
-- Stat mismatch check (output on its own line, separate from VTR check):
-  For every percentage figure cited in Slide 4 copy, first determine
-  whether it is an IMPRESSIONS figure or a SPEND figure by reading
-  the surrounding text carefully. Then compare only like-for-like:
-  impressions % against impressions %, spend % against spend %.
-  NEVER compare a spend % figure with an impressions % figure —
-  these will naturally differ and are not a mismatch.
-  If a stat mismatch is found: "❌ Stat mismatch: Slide 4 cites [X]%
-  [impressions/spend] but Slide [N] shows [Y]% [impressions/spend]."
-  If all stats are consistent: "✅ All stats in Slide 4 copy are consistent
-  with source slides."
+- VTR check:
+  Only output a line if you can directly read and quote exact VTR text
+  from Slide 4. If you find it: "❌ VTR reference in Slide 4: '[exact text]' — remove."
+  If not found: output nothing. Do not write any line about VTR passing.
+
+- Stat mismatch check (on its own separate line):
+  For each percentage in Slide 4 copy, read the surrounding text to
+  determine: is this an IMPRESSIONS figure or a SPEND figure?
+  Then compare ONLY like-for-like:
+  → impressions % on Slide 4 vs impressions % on Slide 3/7/8
+  → spend % on Slide 4 vs spend % on Slide 3/7/8
+  If a figure on Slide 4 is labelled SPEND and the source slide shows
+  an IMPRESSIONS figure — these are DIFFERENT metrics, not a mismatch.
+  Do NOT flag this. Only flag when the same metric type has different values.
+  If mismatch found: "❌ Stat mismatch: Slide 4 cites [X]% [spend/impressions]
+  but Slide [N] shows [Y]% [spend/impressions] for the same metric."
+  If no mismatch: output nothing.
 
 PART B — OBSERVATIONS:
 For each bullet, check if the existing slide copy already contains
