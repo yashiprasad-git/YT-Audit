@@ -81,8 +81,8 @@ if check_password():
                     doc = fitz.open(stream=pdf_bytes, filetype="pdf")
                     page_images = []
                     for page in doc:
-                        pix = page.get_pixmap(dpi=150)
-                        img_bytes = pix.tobytes("png")
+                        pix = page.get_pixmap(dpi=96)
+                        img_bytes = pix.tobytes("jpeg")
                         img_b64 = base64.standard_b64encode(img_bytes).decode("utf-8")
                         page_images.append(img_b64)
                     doc.close()
@@ -102,8 +102,8 @@ if check_password():
                         user_content.append({
                             "type": "image_url",
                             "image_url": {
-                                "url": f"data:image/png;base64,{img_b64}",
-                                "detail": "high"
+                                "url": f"data:image/jpeg;base64,{img_b64}",
+                                "detail": "auto"
                             }
                         })
 
