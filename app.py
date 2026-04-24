@@ -1,6 +1,7 @@
 import streamlit as st
 from openai import OpenAI
 import base64
+import fitz  # pymupdf
 
 # ── Page config ──────────────────────────────────────────
 st.set_page_config(
@@ -75,11 +76,16 @@ if check_password():
             ):
 
                 try:
-                    # Read and encode PDF to base64
+                    # Convert PDF pages to images
                     pdf_bytes = uploaded_file.read()
-                    pdf_base64 = base64.standard_b64encode(
-                        pdf_bytes
-                    ).decode("utf-8")
+                    doc = fitz.open(stream=pdf_bytes, filetype="pdf")
+                    page_images = []
+                    for page in doc:
+                        pix = page.get_pixmap(dpi=150)
+                        img_bytes = pix.tobytes("png")
+                        img_b64 = base64.standard_b64encode(img_bytes).decode("utf-8")
+                        page_images.append(img_b64)
+                    doc.close()
 
                     # Load system prompt from file
                     with open("prompt.txt", "r", encoding="utf-8") as f:
@@ -89,6 +95,17 @@ if check_password():
                     client = OpenAI(
                         api_key=st.secrets["OPENAI_API_KEY"]
                     )
+
+                    # Build user content: text prompt + one image per page
+                    user_content = [{"type": "text", "text": "Analyse this report."}]
+                    for img_b64 in page_images:
+                        user_content.append({
+                            "type": "image_url",
+                            "image_url": {
+                                "url": f"data:image/png;base64,{img_b64}",
+                                "detail": "high"
+                            }
+                        })
 
                     # Send to GPT-4o with vision
                     response = client.chat.completions.create(
@@ -101,19 +118,7 @@ if check_password():
                             },
                             {
                                 "role": "user",
-                                "content": [
-                                    {
-                                        "type": "text",
-                                        "text": "Analyse this report."
-                                    },
-                                    {
-                                        "type": "image_url",
-                                        "image_url": {
-                                            "url": f"data:application/pdf;base64,{pdf_base64}",
-                                            "detail": "high"
-                                        }
-                                    }
-                                ]
+                                "content": user_content
                             }
                         ]
                     )
