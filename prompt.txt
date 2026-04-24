@@ -29,6 +29,9 @@ Only flag issues if any of the following are present:
 
 - Any parameter field appears blank or incomplete
 - Currency is missing from spend or CPM figures
+  (Note: currency is considered present if a symbol such as €, $, £
+  or a currency code such as EUR, USD, GBP, AUD appears anywhere near
+  the figures. Only flag if currency is completely absent.)
 - Brand Category seems inconsistent with the brand name
   (e.g. a clearly B2C product listed under a B2B category)
 - Language Targeting and Geo seem mismatched
@@ -57,6 +60,10 @@ However, flag if:
 - The total wasted impressions % is LOWER than the single largest
   component (also impossible — e.g. if Misaligned = 65% but
   Total Wasted = 55%, that is a discrepancy)
+  Worked example of what is FINE and should NOT be flagged:
+  Total Wasted = 97.48%, Misaligned = 73.57% → 97.48 > 73.57 → no issue.
+  Worked example of what SHOULD be flagged:
+  Total Wasted = 55%, Misaligned = 73.57% → 55 < 73.57 → flag this.
 - Any figure appears to be 0% or blank when the corresponding
   detailed slide shows data
 
@@ -81,7 +88,9 @@ CROSS-CHECK 5 — Wasted Ad Spend plausibility:
 Wasted Ad Spend should be less than or equal to Total Media Spend.
 Flag if Wasted Ad Spend exceeds Total Media Spend.
 
-If no issues found: "No issues or discrepancies found on Slide 3."
+Only write "No issues or discrepancies found on Slide 3." if ALL
+five cross-checks pass with no flags raised. Do not write this
+line if any issue was flagged above.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 SLIDE 4 — TOP OBSERVATIONS: ANALYSIS + FLAGS
@@ -100,6 +109,11 @@ following issues and flag them:
 
 - Any stat cited in the Top Observations copy that does not match
   the numbers on Slide 3, 7, or 8 should be flagged as a mismatch.
+  IMPORTANT: Brand Unsafe % on Slide 3 is an IMPRESSIONS figure.
+  Slide 4 copy may separately cite a Brand Unsafe SPEND % which will
+  be a different number — this is intentional and must NOT be flagged
+  as a mismatch. Only flag if the same metric (impressions vs impressions,
+  or spend vs spend) is cited inconsistently.
 
 PART B — OBSERVATIONS (rewrite or validate existing copy):
 Write exactly 4 bullet observations using the following structure:
