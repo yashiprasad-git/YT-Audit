@@ -36,29 +36,30 @@ SLIDE 2 — CAMPAIGN OVERVIEW
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Do NOT summarize the campaign parameters.
-Check each of the following and prefix every line with ✅ or ❌:
+Only output a line if there is an actual issue. Do not output a line
+for checks that pass — passing checks are silent.
+Only use ❌ when a real problem is found. If nothing is wrong, write:
+"✅ No issues found on Slide 2."
 
-- ✅ or ❌ Any parameter field appears blank or incomplete
-- ✅ or ❌ Currency present on spend and CPM figures
-  (currency is present if a symbol such as €, $, £ or a code such as
-  EUR, USD, GBP, AUD appears anywhere near the figures.
-  Only flag ❌ if currency is completely absent.)
-- ✅ or ❌ Brand Category is consistent with the brand name
-  (e.g. flag ❌ if a clearly B2C product is listed under a B2B category)
-- ✅ or ❌ Language Targeting and Geo are matched
-  (flag ❌ if e.g. Geo = Germany but Language = English with no explanation)
+Check the following silently and only report issues:
+
+- If any parameter field is blank or incomplete → ❌ [Field name] is blank or incomplete.
+- If currency is missing from spend or CPM figures → ❌ Currency missing from [field].
+  (Currency is present if a symbol such as €, $, £ or a code such as
+  EUR, USD, GBP, AUD appears anywhere near the figures. Only flag if
+  completely absent.)
+- If Brand Category seems inconsistent with the brand name → ❌ [explain inconsistency].
+- If Language Targeting and Geo are mismatched → ❌ [explain mismatch].
 - Do NOT flag the Key Exclusions field under any circumstances.
   It is optional and may intentionally be left blank.
-- ✅ or ❌ Analyzed Channels count is plausible relative to total impressions.
-  IMPORTANT: The Analyzed Channels count is a large number (typically
-  in the hundreds or thousands). It is a distinct field explicitly
-  labelled "Analyzed Channels" or similar. Do NOT confuse it with
-  CPM, qCPM, or any currency figure — those are always preceded by
-  a currency symbol or code (€, EUR, $, etc.).
-  If you cannot locate a clearly labelled Analyzed Channels count,
-  write: ✅ Analyzed Channels count not separately visible — skip check.
-
-If all checks pass: "✅ No issues found on Slide 2."
+- Analyzed Channels count: The count is a large number (typically in
+  the hundreds or thousands), in a field explicitly labelled
+  "Analyzed Channels" or similar. Do NOT confuse it with CPM, qCPM,
+  or any currency figure — those are always preceded by a currency
+  symbol or code (€, EUR, $, etc.).
+  If the count seems disproportionately low or high → ❌ Analyzed
+  Channels count of [N] seems disproportionate relative to [impressions].
+  If you cannot locate the field at all → say nothing, skip this check.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 SLIDE 3 — EXECUTIVE SUMMARY
@@ -118,22 +119,27 @@ PART A — DATA FLAGS:
 Before writing the observations, scan the existing slide copy and
 prefix every finding with ✅ or ❌:
 
-- VTR data flag: Only flag ❌ if you can directly read and quote
-  the exact VTR text as it appears in the Slide 4 copy.
-  Do NOT flag VTR if you cannot find and quote a specific sentence
-  or phrase from Slide 4 that mentions VTR or view-through rate.
-  Do not assume VTR is referenced — you must see it written on the slide.
-  If flagging: "❌ Slide 4 contains VTR reference: '[exact quoted text]'
-  — remove this as VTR data is not present in this report."
-  If no VTR language found: "✅ No VTR references in Slide 4 copy."
+Output each check on its own separate line.
 
-- Stat mismatches: prefix ❌ if any stat in the copy does not match
-  Slide 3, 7, or 8. Prefix ✅ if all stats are consistent.
-  IMPORTANT: Brand Unsafe % on Slide 3 is an IMPRESSIONS figure.
-  Slide 4 copy may separately cite a Brand Unsafe SPEND % which will
-  be a different number — this is intentional and must NOT be flagged
-  as a mismatch. Only flag ❌ if the same metric (impressions vs
-  impressions, or spend vs spend) is cited inconsistently.
+- VTR check (output on its own line):
+  Only flag ❌ if you can directly read and quote the exact VTR text
+  as it appears in the Slide 4 copy. Do NOT flag if you cannot find
+  and quote a specific sentence or phrase mentioning VTR or
+  view-through rate. Do not assume — you must see it written.
+  If flagging: "❌ VTR reference found in Slide 4: '[exact quoted text]' — remove."
+  If not found: "✅ No VTR references in Slide 4 copy."
+
+- Stat mismatch check (output on its own line, separate from VTR check):
+  For every percentage figure cited in Slide 4 copy, first determine
+  whether it is an IMPRESSIONS figure or a SPEND figure by reading
+  the surrounding text carefully. Then compare only like-for-like:
+  impressions % against impressions %, spend % against spend %.
+  NEVER compare a spend % figure with an impressions % figure —
+  these will naturally differ and are not a mismatch.
+  If a stat mismatch is found: "❌ Stat mismatch: Slide 4 cites [X]%
+  [impressions/spend] but Slide [N] shows [Y]% [impressions/spend]."
+  If all stats are consistent: "✅ All stats in Slide 4 copy are consistent
+  with source slides."
 
 PART B — OBSERVATIONS:
 For each bullet, check if the existing slide copy already contains
@@ -162,15 +168,15 @@ gap where a portion of the media investment did not translate into
 proportional value."
 
 - Bullet 3 — Brand unsafe spend:
-Use the Brand Unsafe SPEND % from the report — this is a spend figure,
-not an impressions figure. The spend % may appear on Slide 7 or Slide 4.
-It will often differ from the Brand Unsafe Impressions % on Slide 3.
-Use whichever spend figure is explicitly stated in the report.
-If no spend % is separately stated and only an impressions % exists,
-use the impressions % but label it as impressions, not spend.
-Additionally: if Brand Unsafe Spend % and Brand Unsafe Impressions %
-are identical, flag: "❌ Brand Unsafe Spend % equals Impressions %
-— verify these are not the same figure being duplicated."
+The report contains TWO separate Brand Unsafe figures — read carefully:
+  (a) Brand Unsafe IMPRESSIONS % — typically shown on Slide 3 and Slide 7
+  (b) Brand Unsafe SPEND % — typically shown on Slide 7 or Slide 4
+These will often be different numbers. For this bullet, use only the
+SPEND % figure. Look for it explicitly labelled as "spend" or "media spend".
+If only an impressions % is present and no spend % is stated separately,
+use the impressions % but write "impressions" not "spend" in the sentence.
+If both figures exist and are identical: flag ❌ with a note to verify
+they are not the same figure duplicated.
 Format: "[X]% of the media spend was wasted on brand-unsafe content,
 appearing alongside [list top 3 unsafe categories from Slide 7]."
 
