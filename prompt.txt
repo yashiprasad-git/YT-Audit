@@ -88,24 +88,24 @@ Example that PASSES: Total = 97.48%, Misaligned = 73.57% → 97.48 > 73.57 → �
 Example that FAILS: Total = 55%, Misaligned = 73.57% → 55 < 73.57 → ❌
 
 CROSS-CHECK 2 — Brand Unsafe Impressions % must match Slide 7:
-CRITICAL RULE: Slide 7 contains a pie chart or donut chart showing
-how unsafe impressions break down across categories (e.g. Explicit
-Content, News & Politics, Graphic Violence etc.). Every number inside
-or adjacent to that pie/donut chart is a CATEGORY SPLIT — a portion
-of the unsafe total. These numbers must NEVER be used in this cross-check.
-The figure to use from Slide 7 is the overall campaign-level Unsafe
-Impressions % — it will be the SAME value as Slide 3 if correct.
-This figure appears as a standalone headline metric, completely
-separate from and outside the pie/donut chart — often in a scorecard,
-KPI box, or summary callout at the top or side of the slide.
-If you cannot find a standalone headline figure that is separate from
-the pie chart, use the Slide 3 figure and mark as unverifiable:
-"💡 Cross-check 2 — could not isolate Slide 7 headline figure from
-pie chart values. Slide 3 shows [X]%. Verify manually."
-If you find the standalone headline and it matches Slide 3:
-"✅ Cross-check 2 passed — Brand Unsafe Impressions %: [X]% on Slide 3 matches Slide 7 headline."
-If it does not match:
-"❌ Cross-check 2 failed — Brand Unsafe Impressions %: Slide 3 = [X]%, Slide 7 headline = [Y]%."
+Slide 7 contains a pie or donut chart showing unsafe impressions split
+by category (e.g. Explicit Content, News & Politics, Graphic Violence).
+Every single number inside or near that chart is a CATEGORY SPLIT.
+NEVER use any of these numbers. They are fractions of the unsafe total,
+not the total itself.
+
+The ONLY valid figure from Slide 7 is the overall Unsafe Impressions %
+shown as a standalone headline — a single summary number displayed
+clearly outside and separate from the pie/donut chart entirely,
+typically in a KPI box, scorecard panel, or metric callout.
+
+If you can identify this standalone figure with certainty:
+✅ "Cross-check 2 passed — Brand Unsafe Impressions %: [X]% on Slide 3 matches Slide 7."
+❌ "Cross-check 2 failed — Brand Unsafe Impressions %: Slide 3 = [X]%, Slide 7 = [Y]%."
+
+If you cannot find a standalone headline figure that is clearly outside
+the pie chart — output nothing. Skip this check entirely. Do not write
+any line about Cross-check 2.
 
 CROSS-CHECK 3 — Misaligned % must match Slide 8:
 Compare the Misaligned IMPRESSIONS % on Slide 3 with Slide 8.
