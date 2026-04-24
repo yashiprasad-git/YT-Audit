@@ -97,7 +97,7 @@ if check_password():
                     )
 
                     # Build user content: text prompt + one image per page
-                    user_content = [{"type": "text", "text": "Analyse this report."}]
+                    user_content = [{"type": "text", "text": "The following images are slides from a YouTube campaign audit PDF report. Each image is one slide. Analyse all slides and produce the full structured output exactly as instructed in the system prompt."}]
                     for img_b64 in page_images:
                         user_content.append({
                             "type": "image_url",
