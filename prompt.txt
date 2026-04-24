@@ -36,8 +36,12 @@ Only flag issues if any of the following are present:
   (e.g. a clearly B2C product listed under a B2B category)
 - Language Targeting and Geo seem mismatched
   (e.g. Geo = Germany but Language = English with no explanation)
-- Key Exclusions field is blank when the brand type typically warrants exclusions
-  (e.g. a financial or adult brand with no Kids exclusion listed)
+- Key Exclusions field is blank ONLY for brand types where exclusions
+  are standard practice: financial services, alcohol, gambling, adult
+  content, or brands explicitly targeting adults only.
+  Do NOT flag blank Key Exclusions for cosmetics, beauty, FMCG,
+  retail, or general consumer brands — exclusions are not expected
+  for these categories.
 - Analyzed Channels count seems disproportionately low or high
   relative to total impressions
 
@@ -70,22 +74,24 @@ However, flag if:
 CROSS-CHECK 2 — Brand Unsafe % must match Slide 7:
 The Brand Unsafe % shown on Slide 3 must exactly match the
 "Unsafe Impressions" % shown on Slide 7.
-Flag if there is any mismatch, even by 0.1%.
-Format: "Slide 3 shows [X]% unsafe. Slide 7 shows [Y]% unsafe. ⚠️ Mismatch."
+If match: "✅ Slide 3 shows [X]% unsafe. Slide 7 shows [X]% unsafe. Match confirmed."
+If mismatch: "Slide 3 shows [X]% unsafe. Slide 7 shows [Y]% unsafe. ⚠️ Mismatch."
 
 CROSS-CHECK 3 — Misaligned % must match Slide 8:
 The Misaligned % shown on Slide 3 must exactly match the
 "Impression Impact" % shown on Slide 8.
-Flag if there is any mismatch.
-Format: "Slide 3 shows [X]% misaligned. Slide 8 shows [Y]% misaligned. ⚠️ Mismatch."
+If match: "✅ Slide 3 shows [X]% misaligned. Slide 8 shows [X]% misaligned. Match confirmed."
+If mismatch: "Slide 3 shows [X]% misaligned. Slide 8 shows [Y]% misaligned. ⚠️ Mismatch."
 
 CROSS-CHECK 4 — CPM vs qCPM direction:
 qCPM must always be HIGHER than Campaign CPM
 (since it reflects the true cost after removing wasted impressions).
+If correct: "✅ qCPM ([amount]) is higher than Campaign CPM ([amount]). Correct direction."
 Flag if qCPM is equal to or lower than Campaign CPM.
 
 CROSS-CHECK 5 — Wasted Ad Spend plausibility:
 Wasted Ad Spend should be less than or equal to Total Media Spend.
+If correct: "✅ Wasted Ad Spend ([amount]) does not exceed Total Media Spend ([amount]). Plausible."
 Flag if Wasted Ad Spend exceeds Total Media Spend.
 
 Only write "No issues or discrepancies found on Slide 3." if ALL
@@ -139,8 +145,17 @@ gap where a portion of the media investment did not translate into
 proportional value."
 
 - Bullet 3 — Brand unsafe spend:
-"[X]% of the spend was wasted on brand unsafe content, appearing
-alongside [list top 3 unsafe categories from Slide 7]."
+Use the Brand Unsafe SPEND % from the report — this is a spend figure,
+not an impressions figure. The spend % may appear on Slide 7 or Slide 4.
+It will often differ from the Brand Unsafe Impressions % on Slide 3.
+Use whichever spend figure is explicitly stated in the report.
+If no spend % is separately stated and only an impressions % exists,
+use the impressions % but label it as impressions, not spend.
+Additionally: if Brand Unsafe Spend % and Brand Unsafe Impressions %
+are identical, flag this: "⚠️ Brand Unsafe Spend % equals Impressions %
+— verify these are not the same figure being duplicated."
+Format: "[X]% of the media spend was wasted on brand-unsafe content,
+appearing alongside [list top 3 unsafe categories from Slide 7]."
 
 - Bullet 4 — Primary misalignment finding:
 Identify the single largest misalignment issue from Slide 8.
@@ -154,15 +169,18 @@ SLIDE 6 — CATEGORY IMPRESSIONS vs VTR: INSIGHT + FLAGS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 PART A — DATA FLAGS:
-- Examine the chart carefully for a VTR data line. Look for:
-  a secondary Y-axis on the right side of the chart, any line
-  graph overlaid on the bar chart, or any data series labelled
-  VTR, View-Through Rate, or shown as a percentage line.
-  Only flag VTR as absent if after careful visual inspection
-  no such line or data series exists anywhere in the chart.
-  If VTR line IS present, do not flag it.
-  Format when absent: "⚠️ VTR line/data not present in chart but
-  slide references VTR in [title / legend / caption]. Remove VTR references."
+- Examine the Slide 6 chart with extreme care for a VTR data line.
+  VTR is typically shown as a thin line (often orange, red, or a
+  contrasting colour) overlaid on top of the bar chart, with its
+  own percentage scale on the RIGHT-HAND Y-axis.
+  Also look for: a dot/point series, a secondary axis label on the
+  right, or any legend entry mentioning VTR or View-Through Rate.
+  If ANY of these are present, VTR data exists — do NOT flag it.
+  Only flag VTR as absent if after thorough inspection of the full
+  chart area, legend, and both axes, no VTR line or data exists.
+  Format when truly absent: "⚠️ VTR line/data not present in chart
+  but slide references VTR in [title / legend / caption]. Remove VTR references."
+  Format when present: "✅ VTR line confirmed present in chart."
 
 - If Benchmark CPM or Benchmark VTR lines are referenced in the
   legend but the corresponding data lines are not visible/populated
@@ -301,19 +319,27 @@ Output format:
 SPELLING & GRAMMAR AUDIT
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-Review ALL slide copy in the uploaded report. Flag every instance of:
+Read every word of every slide carefully. Flag ALL instances of:
 - Spelling errors
 - Grammar errors
 - Inconsistent terminology across slides
 - Punctuation issues
 
-Output format:
-Slide [X]: "[original text]" → "[corrected text]"
-([Spelling / Grammar / Punctuation / Consistency])
+Be exhaustive and consistent — list every error found across all slides.
+Do not skip any errors. Do not vary results between runs on the same report.
 
-Common errors to watch for from past reports:
+Specifically check every slide for these common errors seen in past reports:
 "irrevelant" "impresssions" "unsfae" "recomenndation"
-"cehck" "mislaigned" "wastage" used inconsistently
+"cehck" "mislaigned" and any inconsistent use of "wastage" vs "waste"
+
+Also check:
+- Capitalisation consistency (e.g. "Media Spend" vs "media spend")
+- Hyphenation consistency ("brand-unsafe" as adjective vs "brand unsafe" as noun)
+- Number formatting (currency codes, % symbols, comma separators)
+
+Output format for each error found:
+Slide [X]: "[exact original text as it appears]" → "[corrected text]"
+([Spelling / Grammar / Punctuation / Consistency])
 
 End with: "Total errors found: [N]"
 If none: "No spelling or grammar issues found."
