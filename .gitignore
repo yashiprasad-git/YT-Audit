@@ -1,0 +1,23 @@
+# Secrets - never push these to GitHub
+.env
+.streamlit/secrets.toml
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.py[cod]
+
+# Virtual environment
+venv/
+env/
+ENV/
+
+# Mac
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
