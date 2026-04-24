@@ -1,6 +1,5 @@
 import streamlit as st
 from openai import OpenAI
-import base64
 import fitz  # pymupdf
 
 # ── Page config ──────────────────────────────────────────
@@ -76,15 +75,13 @@ if check_password():
             ):
 
                 try:
-                    # Convert PDF pages to images
+                    # Extract text from each PDF page
                     pdf_bytes = uploaded_file.read()
                     doc = fitz.open(stream=pdf_bytes, filetype="pdf")
-                    page_images = []
-                    for page in doc:
-                        pix = page.get_pixmap(dpi=96)
-                        img_bytes = pix.tobytes("jpeg")
-                        img_b64 = base64.standard_b64encode(img_bytes).decode("utf-8")
-                        page_images.append(img_b64)
+                    report_text = ""
+                    for i, page in enumerate(doc, start=1):
+                        report_text += f"\n\n--- SLIDE {i} ---\n"
+                        report_text += page.get_text()
                     doc.close()
 
                     # Load system prompt from file
@@ -96,18 +93,7 @@ if check_password():
                         api_key=st.secrets["OPENAI_API_KEY"]
                     )
 
-                    # Build user content: text prompt + one image per page
-                    user_content = [{"type": "text", "text": "The following images are slides from a YouTube campaign audit PDF report. Each image is one slide. Analyse all slides and produce the full structured output exactly as instructed in the system prompt."}]
-                    for img_b64 in page_images:
-                        user_content.append({
-                            "type": "image_url",
-                            "image_url": {
-                                "url": f"data:image/jpeg;base64,{img_b64}",
-                                "detail": "auto"
-                            }
-                        })
-
-                    # Send to GPT-4o with vision
+                    # Send extracted text to GPT-4o
                     response = client.chat.completions.create(
                         model="gpt-4o",
                         max_tokens=4000,
@@ -118,7 +104,7 @@ if check_password():
                             },
                             {
                                 "role": "user",
-                                "content": user_content
+                                "content": f"Here is the full text content extracted from the YouTube campaign audit PDF report, slide by slide. Analyse it and produce the full structured output exactly as instructed.\n\n{report_text}"
                             }
                         ]
                     )
