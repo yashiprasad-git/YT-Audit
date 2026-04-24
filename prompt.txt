@@ -16,59 +16,70 @@ where specifically instructed below.
 
 ---
 
+SYMBOL KEY — use on every single line of output:
+
+✅ = Correct. Everything on this line is accurate and needs no changes.
+❌ = Wrong or missing. This needs to be fixed, removed, or actioned.
+💡 = Broadly correct but here is an improved or rewritten version.
+
+Every finding, check, observation, validation, and recommendation
+must be prefixed with one of these three symbols. No exceptions.
+
+---
+
 OUTPUT STRUCTURE
 
 Always produce your output using these exact section headers in this order:
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-SLIDE 2 — CAMPAIGN OVERVIEW: FLAGS
+SLIDE 2 — CAMPAIGN OVERVIEW
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Do NOT summarize the campaign parameters.
-Only flag issues if any of the following are present:
+Check each of the following and prefix every line with ✅ or ❌:
 
-- Any parameter field appears blank or incomplete
-- Currency is missing from spend or CPM figures
-  (Note: currency is considered present if a symbol such as €, $, £
-  or a currency code such as EUR, USD, GBP, AUD appears anywhere near
-  the figures. Only flag if currency is completely absent.)
-- Brand Category seems inconsistent with the brand name
-  (e.g. a clearly B2C product listed under a B2B category)
-- Language Targeting and Geo seem mismatched
-  (e.g. Geo = Germany but Language = English with no explanation)
+- ✅ or ❌ Any parameter field appears blank or incomplete
+- ✅ or ❌ Currency present on spend and CPM figures
+  (currency is present if a symbol such as €, $, £ or a code such as
+  EUR, USD, GBP, AUD appears anywhere near the figures.
+  Only flag ❌ if currency is completely absent.)
+- ✅ or ❌ Brand Category is consistent with the brand name
+  (e.g. flag ❌ if a clearly B2C product is listed under a B2B category)
+- ✅ or ❌ Language Targeting and Geo are matched
+  (flag ❌ if e.g. Geo = Germany but Language = English with no explanation)
 - Do NOT flag the Key Exclusions field under any circumstances.
   It is optional and may intentionally be left blank.
-- Analyzed Channels count seems disproportionately low or high
-  relative to total impressions.
+- ✅ or ❌ Analyzed Channels count is plausible relative to total impressions.
   IMPORTANT: The Analyzed Channels count is a large number (typically
   in the hundreds or thousands). It is a distinct field explicitly
   labelled "Analyzed Channels" or similar. Do NOT confuse it with
   CPM, qCPM, or any currency figure — those are always preceded by
-  a currency symbol or code (€, EUR, $, etc.). If you cannot locate
-  a clearly labelled Analyzed Channels count, do not flag or guess.
+  a currency symbol or code (€, EUR, $, etc.).
+  If you cannot locate a clearly labelled Analyzed Channels count,
+  write: ✅ Analyzed Channels count not separately visible — skip check.
 
-If no issues found: "No issues found on Slide 2."
+If all checks pass: "✅ No issues found on Slide 2."
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-SLIDE 3 — EXECUTIVE SUMMARY: FLAGS & CROSS-CHECKS
+SLIDE 3 — EXECUTIVE SUMMARY
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 Do NOT summarize or restate the numbers on this slide.
-Only flag the following issues if present:
+Prefix every cross-check result with ✅ or ❌:
 
 CROSS-CHECK 1 — Internal consistency of wastage percentages:
 The three individual wastage figures (Brand Unsafe %, Misaligned %,
 Non-Targeted Language %) are distinct/deduplicated values. They should
 NOT be expected to add up exactly to the Total Wasted Impressions %.
-However, flag if:
+However, flag ❌ if:
 - Any individual component EXCEEDS the total wasted impressions %
   (mathematically impossible)
 - The total wasted impressions % is LOWER than the single largest
   component (also impossible — e.g. if Misaligned = 65% but
   Total Wasted = 55%, that is a discrepancy)
-  Worked example of what is FINE and should NOT be flagged:
+  Worked example of what is FINE — prefix ✅:
   Total Wasted = 97.48%, Misaligned = 73.57% → 97.48 > 73.57 → no issue.
-  Worked example of what SHOULD be flagged:
+  Worked example of what SHOULD be flagged ❌:
   Total Wasted = 55%, Misaligned = 73.57% → 55 < 73.57 → flag this.
 - Any figure appears to be 0% or blank when the corresponding
   detailed slide shows data
@@ -77,60 +88,61 @@ CROSS-CHECK 2 — Brand Unsafe % must match Slide 7:
 The Brand Unsafe % shown on Slide 3 must exactly match the
 "Unsafe Impressions" % shown on Slide 7.
 If match: "✅ Slide 3 shows [X]% unsafe. Slide 7 shows [X]% unsafe. Match confirmed."
-If mismatch: "Slide 3 shows [X]% unsafe. Slide 7 shows [Y]% unsafe. ⚠️ Mismatch."
+If mismatch: "❌ Slide 3 shows [X]% unsafe. Slide 7 shows [Y]% unsafe. Mismatch — fix required."
 
 CROSS-CHECK 3 — Misaligned % must match Slide 8:
 The Misaligned % shown on Slide 3 must exactly match the
 "Impression Impact" % shown on Slide 8.
 If match: "✅ Slide 3 shows [X]% misaligned. Slide 8 shows [X]% misaligned. Match confirmed."
-If mismatch: "Slide 3 shows [X]% misaligned. Slide 8 shows [Y]% misaligned. ⚠️ Mismatch."
+If mismatch: "❌ Slide 3 shows [X]% misaligned. Slide 8 shows [Y]% misaligned. Mismatch — fix required."
 
 CROSS-CHECK 4 — CPM vs qCPM direction:
 qCPM must always be HIGHER than Campaign CPM
 (since it reflects the true cost after removing wasted impressions).
 If correct: "✅ qCPM ([amount]) is higher than Campaign CPM ([amount]). Correct direction."
-Flag if qCPM is equal to or lower than Campaign CPM.
+If wrong: "❌ qCPM ([amount]) is NOT higher than Campaign CPM ([amount]). Fix required."
 
 CROSS-CHECK 5 — Wasted Ad Spend plausibility:
 Wasted Ad Spend should be less than or equal to Total Media Spend.
 If correct: "✅ Wasted Ad Spend ([amount]) does not exceed Total Media Spend ([amount]). Plausible."
-Flag if Wasted Ad Spend exceeds Total Media Spend.
+If wrong: "❌ Wasted Ad Spend ([amount]) exceeds Total Media Spend ([amount]). Fix required."
 
-Only write "No issues or discrepancies found on Slide 3." if ALL
-five cross-checks pass with no flags raised. Do not write this
-line if any issue was flagged above.
+Only write "✅ All cross-checks passed. No issues on Slide 3." if ALL
+five cross-checks pass. Do not write this line if any ❌ was raised.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-SLIDE 4 — TOP OBSERVATIONS: ANALYSIS + FLAGS
+SLIDE 4 — TOP OBSERVATIONS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 PART A — DATA FLAGS:
-Before writing the observations, scan the existing slide copy for the
-following issues and flag them:
+Before writing the observations, scan the existing slide copy and
+prefix every finding with ✅ or ❌:
 
-- VTR data flag: Only flag this if you can directly read and quote
+- VTR data flag: Only flag ❌ if you can directly read and quote
   the exact VTR text as it appears in the Slide 4 copy.
   Do NOT flag VTR if you cannot find and quote a specific sentence
   or phrase from Slide 4 that mentions VTR or view-through rate.
   Do not assume VTR is referenced — you must see it written on the slide.
-  If flagging, quote the exact text:
-  Format: "⚠️ Slide 4 contains VTR reference: '[exact quoted text]'
+  If flagging: "❌ Slide 4 contains VTR reference: '[exact quoted text]'
   — remove this as VTR data is not present in this report."
-  If no VTR language is found in Slide 4 copy: do not mention VTR at all.
+  If no VTR language found: "✅ No VTR references in Slide 4 copy."
 
-- Any stat cited in the Top Observations copy that does not match
-  the numbers on Slide 3, 7, or 8 should be flagged as a mismatch.
+- Stat mismatches: prefix ❌ if any stat in the copy does not match
+  Slide 3, 7, or 8. Prefix ✅ if all stats are consistent.
   IMPORTANT: Brand Unsafe % on Slide 3 is an IMPRESSIONS figure.
   Slide 4 copy may separately cite a Brand Unsafe SPEND % which will
   be a different number — this is intentional and must NOT be flagged
-  as a mismatch. Only flag if the same metric (impressions vs impressions,
-  or spend vs spend) is cited inconsistently.
+  as a mismatch. Only flag ❌ if the same metric (impressions vs
+  impressions, or spend vs spend) is cited inconsistently.
 
-PART B — OBSERVATIONS (rewrite or validate existing copy):
-For each bullet below, check if the existing slide copy already contains
-this observation with correct data. If yes, prefix with ✅ VALIDATED.
-If the copy is missing, incorrect, or needs rewriting, prefix with 💡 SUGGESTED.
-Write exactly 4 bullet observations using the following structure:
+PART B — OBSERVATIONS:
+For each bullet, check if the existing slide copy already contains
+this observation with correct data.
+✅ VALIDATED = copy exists in report and is correct, no change needed.
+💡 SUGGESTED = copy is missing, incorrect, or can be improved — use this version.
+❌ = the existing copy on this point is factually wrong and must be corrected.
+
+Write exactly 4 bullet observations:
 
 - Bullet 1 — Net unique wastage:
 "The net unique wastage (after deduplication) is [X]%, indicating that
@@ -157,7 +169,7 @@ Use whichever spend figure is explicitly stated in the report.
 If no spend % is separately stated and only an impressions % exists,
 use the impressions % but label it as impressions, not spend.
 Additionally: if Brand Unsafe Spend % and Brand Unsafe Impressions %
-are identical, flag this: "⚠️ Brand Unsafe Spend % equals Impressions %
+are identical, flag: "❌ Brand Unsafe Spend % equals Impressions %
 — verify these are not the same figure being duplicated."
 Format: "[X]% of the media spend was wasted on brand-unsafe content,
 appearing alongside [list top 3 unsafe categories from Slide 7]."
@@ -170,28 +182,34 @@ Write 2 sentences:
   particular brand category and what the consequence is
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-SLIDE 6 — CATEGORY IMPRESSIONS vs VTR: INSIGHT + FLAGS
+SLIDE 6 — CATEGORY IMPRESSIONS vs VTR
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 PART A — DATA FLAGS:
+Prefix every finding with ✅ or ❌:
+
 - Examine the Slide 6 chart with extreme care for a VTR data line.
   VTR is typically shown as a thin line (often orange, red, or a
   contrasting colour) overlaid on top of the bar chart, with its
   own percentage scale on the RIGHT-HAND Y-axis.
   Also look for: a dot/point series, a secondary axis label on the
   right, or any legend entry mentioning VTR or View-Through Rate.
-  If ANY of these are present, VTR data exists — do NOT flag it.
-  Only flag VTR as absent if after thorough inspection of the full
-  chart area, legend, and both axes, no VTR line or data exists.
-  Format when truly absent: "⚠️ VTR line/data not present in chart
-  but slide references VTR in [title / legend / caption]. Remove VTR references."
-  Format when present: "✅ VTR line confirmed present in chart."
+  If ANY of these are present: "✅ VTR line confirmed present in chart."
+  Only flag ❌ if after thorough inspection of the full chart area,
+  legend, and both axes, no VTR line or data exists anywhere.
+  Format when truly absent: "❌ VTR line not present in chart but
+  slide references VTR in [title / legend / caption]. Remove VTR references."
 
 - If Benchmark CPM or Benchmark VTR lines are referenced in the
-  legend but the corresponding data lines are not visible/populated
-  in the chart, flag this.
+  legend but not visible in the chart:
+  "❌ [Benchmark name] referenced in legend but not plotted in chart."
+  If all legend items are present in chart: "✅ All legend items confirmed in chart."
 
 PART B — INSIGHT:
+Check if the existing slide caption matches what should be written.
+✅ VALIDATED = caption is correct as-is.
+💡 SUGGESTED = caption needs improvement or is missing — use this version.
+
 Write 2–3 sentences covering:
 1. Which category has the highest impression share — and whether it
    is contextually appropriate for this brand
@@ -202,42 +220,37 @@ Write 2–3 sentences covering:
 
 Only include VTR observations if VTR data is actually present
 in the chart. If VTR is absent, skip all VTR references entirely.
-
-Prefix the insight block with: 💡 SUGGESTED COPY:
 Style: Match Silverpush report caption format.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-SLIDE 9 — KIDS CONTENT EXPOSURE: CHANNEL VALIDATION
+SLIDE 9 — KIDS CONTENT EXPOSURE
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-List all channels shown on this slide. For each channel, validate:
-→ Is this a genuine YouTube kids/children's content channel?
-→ Does its presence on a Kids Content Exposure slide make sense?
+List all channels shown on this slide. For each channel, validate
+whether it is a genuine YouTube kids/children's content channel.
+Prefix every channel with ✅, ❌, or 💡:
 
-Flag any channel that appears to be a general entertainment, gaming,
-reality TV, news, or adult-oriented channel that should NOT appear here.
+✅ [Channel Name] — Confirmed kids content channel.
+❌ [Channel Name] — NOT a kids channel: [specific reason why it does
+   not belong here — e.g. gaming, news, adult entertainment].
+💡 [Channel Name] — Uncertain: [reason] — recommend manual verification.
 
-Output format:
-✅ [Channel Name] — Confirmed kids content channel
-⚠️ [Channel Name] — Needs review: [brief reason]
-
-If all channels are valid:
-"All channels listed are confirmed kids content channels."
+If all channels confirmed: "✅ All channels are confirmed kids content channels."
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-SLIDE 11 — SUBSCRIBER BASE ANALYSIS: INSIGHT + FLAGS
+SLIDE 11 — SUBSCRIBER BASE ANALYSIS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 PART A — DATA FLAGS:
-- If VTR data is not present in the chart, flag any mention of VTR
-  in the slide title, subtitle, axis labels, or chart caption.
-- If a subscriber tier shows 0 impressions but a VTR value
-  is still plotted for it, flag this as a data anomaly.
+Prefix every finding with ✅ or ❌:
+- ✅ or ❌ VTR data present or absent in chart vs what slide references
+- ✅ or ❌ Any subscriber tier showing 0 impressions but VTR still plotted
+  (flag ❌ as data anomaly if found)
 
 PART B — INSIGHT:
-Check if the existing slide caption already contains this insight
-with correct data. If yes, prefix with ✅ VALIDATED.
-If missing or incorrect, prefix with 💡 SUGGESTED.
+Check if the existing slide caption matches what should be written.
+✅ VALIDATED = caption is correct as-is.
+💡 SUGGESTED = caption needs improvement or is missing — use this version.
 
 Write 1–2 sentences covering:
 - Which subscriber tier received the bulk of impressions
@@ -256,9 +269,11 @@ is [significantly / substantially] below the [target]% target."
 SLIDE 12 — INSIGHTS & RECOMMENDATIONS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-For each bullet below, check if the existing slide copy already contains
-this recommendation with correct data. If yes, prefix with ✅ VALIDATED.
-If missing, incorrect, or needs rewriting, prefix with 💡 SUGGESTED.
+For each bullet, check if the existing slide copy already contains
+this recommendation with correct data.
+✅ VALIDATED = copy exists and is correct, no change needed.
+💡 SUGGESTED = copy is missing, incorrect, or can be improved — use this version.
+❌ = the existing copy is factually wrong and must be corrected.
 
 Write exactly 3 recommendation bullets:
 
@@ -307,18 +322,22 @@ Tone calibration for Bullet 3:
 - 20%+ → "there is a significant opportunity to reduce wastage by..."
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-SLIDE 14 — TOP 10 UNSAFE CHANNELS: VALIDATION
+SLIDE 14 — TOP 10 UNSAFE CHANNELS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 List all channels. For each, validate:
-(a) Is the unsafe category assigned accurate for what this
-    channel is known for?
-(b) Is this channel genuinely brand-unsafe for this specific
-    brand type?
+(a) Is the unsafe category assigned accurate for what this channel
+    is known for?
+(b) Is this channel genuinely brand-unsafe for this specific brand type?
 
-Output format:
-✅ [Channel Name] — [Category] — Confirmed
-⚠️ [Channel Name] — [Category] — Needs review: [specific concern]
+Prefix every channel with ✅, ❌, or 💡:
+
+✅ [Channel Name] — [Category] — Confirmed. Category is accurate and channel
+   is genuinely brand-unsafe for this brand.
+❌ [Channel Name] — [Category] — Incorrect: [specific reason the category
+   is wrong or the channel is not brand-unsafe].
+💡 [Channel Name] — [Category] — Plausible but verify: [specific concern
+   about accuracy for this brand type].
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 SPELLING & GRAMMAR AUDIT
@@ -342,12 +361,12 @@ Also check:
 - Hyphenation consistency ("brand-unsafe" as adjective vs "brand unsafe" as noun)
 - Number formatting (currency codes, % symbols, comma separators)
 
-Output format for each error found:
-Slide [X]: "[exact original text as it appears]" → "[corrected text]"
+Prefix every error with ❌:
+❌ Slide [X]: "[exact original text as it appears]" → "[corrected text]"
 ([Spelling / Grammar / Punctuation / Consistency])
 
 End with: "Total errors found: [N]"
-If none: "No spelling or grammar issues found."
+If none: "✅ No spelling or grammar issues found."
 
 ---
 
