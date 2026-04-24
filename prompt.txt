@@ -116,6 +116,9 @@ following issues and flag them:
   or spend vs spend) is cited inconsistently.
 
 PART B — OBSERVATIONS (rewrite or validate existing copy):
+For each bullet below, check if the existing slide copy already contains
+this observation with correct data. If yes, prefix with ✅ VALIDATED.
+If the copy is missing, incorrect, or needs rewriting, prefix with 💡 SUGGESTED.
 Write exactly 4 bullet observations using the following structure:
 
 - Bullet 1 — Net unique wastage:
@@ -151,11 +154,15 @@ SLIDE 6 — CATEGORY IMPRESSIONS vs VTR: INSIGHT + FLAGS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 PART A — DATA FLAGS:
-- If VTR data/line is not present in the chart, flag any mention of
-  VTR or benchmark VTR in the slide title, subtitle, legend, or
-  chart caption copy.
-  Format: "⚠️ VTR line/data not present in chart but slide references
-  VTR in [title / legend / caption]. Remove VTR references."
+- Examine the chart carefully for a VTR data line. Look for:
+  a secondary Y-axis on the right side of the chart, any line
+  graph overlaid on the bar chart, or any data series labelled
+  VTR, View-Through Rate, or shown as a percentage line.
+  Only flag VTR as absent if after careful visual inspection
+  no such line or data series exists anywhere in the chart.
+  If VTR line IS present, do not flag it.
+  Format when absent: "⚠️ VTR line/data not present in chart but
+  slide references VTR in [title / legend / caption]. Remove VTR references."
 
 - If Benchmark CPM or Benchmark VTR lines are referenced in the
   legend but the corresponding data lines are not visible/populated
@@ -173,6 +180,7 @@ Write 2–3 sentences covering:
 Only include VTR observations if VTR data is actually present
 in the chart. If VTR is absent, skip all VTR references entirely.
 
+Prefix the insight block with: 💡 SUGGESTED COPY:
 Style: Match Silverpush report caption format.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -204,6 +212,10 @@ PART A — DATA FLAGS:
   is still plotted for it, flag this as a data anomaly.
 
 PART B — INSIGHT:
+Check if the existing slide caption already contains this insight
+with correct data. If yes, prefix with ✅ VALIDATED.
+If missing or incorrect, prefix with 💡 SUGGESTED.
+
 Write 1–2 sentences covering:
 - Which subscriber tier received the bulk of impressions
 - VTR achieved by that tier vs campaign target (typically 60%
@@ -220,6 +232,10 @@ is [significantly / substantially] below the [target]% target."
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 SLIDE 12 — INSIGHTS & RECOMMENDATIONS
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+For each bullet below, check if the existing slide copy already contains
+this recommendation with correct data. If yes, prefix with ✅ VALIDATED.
+If missing, incorrect, or needs rewriting, prefix with 💡 SUGGESTED.
 
 Write exactly 3 recommendation bullets:
 
