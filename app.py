@@ -1,6 +1,6 @@
 import streamlit as st
 from openai import OpenAI
-import fitz  # pymupdf
+import base64
 
 # ── Page config ──────────────────────────────────────────
 st.set_page_config(
@@ -75,14 +75,9 @@ if check_password():
             ):
 
                 try:
-                    # Extract text from each PDF page
+                    # Encode PDF to base64
                     pdf_bytes = uploaded_file.read()
-                    doc = fitz.open(stream=pdf_bytes, filetype="pdf")
-                    report_text = ""
-                    for i, page in enumerate(doc, start=1):
-                        report_text += f"\n\n--- SLIDE {i} ---\n"
-                        report_text += page.get_text()
-                    doc.close()
+                    pdf_base64 = base64.standard_b64encode(pdf_bytes).decode("utf-8")
 
                     # Load system prompt from file
                     with open("prompt.txt", "r", encoding="utf-8") as f:
@@ -93,23 +88,30 @@ if check_password():
                         api_key=st.secrets["OPENAI_API_KEY"]
                     )
 
-                    # Send extracted text to GPT-4o
-                    response = client.chat.completions.create(
+                    # Send PDF directly via Responses API
+                    response = client.responses.create(
                         model="gpt-4o",
-                        max_tokens=4000,
-                        messages=[
-                            {
-                                "role": "system",
-                                "content": system_prompt
-                            },
+                        instructions=system_prompt,
+                        input=[
                             {
                                 "role": "user",
-                                "content": f"Here is the full text content extracted from the YouTube campaign audit PDF report, slide by slide. Analyse it and produce the full structured output exactly as instructed.\n\n{report_text}"
+                                "content": [
+                                    {
+                                        "type": "input_file",
+                                        "filename": uploaded_file.name,
+                                        "file_data": f"data:application/pdf;base64,{pdf_base64}"
+                                    },
+                                    {
+                                        "type": "input_text",
+                                        "text": "Analyse this YouTube campaign audit report and produce the full structured output exactly as instructed."
+                                    }
+                                ]
                             }
-                        ]
+                        ],
+                        max_output_tokens=4000
                     )
 
-                    analysis = response.choices[0].message.content
+                    analysis = response.output_text
 
                     # ── Display output ────────────────────
                     st.markdown("---")
